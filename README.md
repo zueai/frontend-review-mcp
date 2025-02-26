@@ -99,8 +99,8 @@ When making frontend edits:
 - You should summarize my edit request into a couple of sentences so that the frontend reviewer understands the changes you made.
 - You can run this command to get the absolute paths of the 2 most recent screenshots in the /screenshots folder:
 
-```bash
 find screenshots -type f -name "*.png" -exec stat -f "%m %N" {} \; | sort -nr | head -n 2 | awk '{print $2}' | xargs realpath | awk 'NR==1 {print "before path: ", $0} NR==2 {print "after path: ", $0}'
-```
 
 - The tool will either return "yes" if your changes are good, or "no" with a brief explanation if the changes don't satisfy the edit request. Keep editing with the same process until the reviewer returns "yes".
+
+```
