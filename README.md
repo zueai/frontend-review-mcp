@@ -104,5 +104,3 @@ find screenshots -type f -name "*.png" -exec stat -f "%m %N" {} \; | sort -nr | 
 ```
 
 - The tool will either return "yes" if your changes are good, or "no" with a brief explanation if the changes don't satisfy the edit request. Keep editing with the same process until the reviewer returns "yes".
-
-```
