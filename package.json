@@ -1,0 +1,28 @@
+{
+	"name": "screenshot-reader",
+	"module": "index.ts",
+	"bin": {
+		"screenshot-reader": "./build/index.js"
+	},
+	"files": ["build"],
+	"scripts": {
+		"build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+		"check": "bunx biome check --write .",
+		"start": "node build/index.js"
+	},
+	"type": "module",
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@types/bun": "latest",
+		"@types/node": "^22.13.5"
+	},
+	"peerDependencies": {
+		"typescript": "^5.7.3"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.6.0",
+		"dotenv": "^16.4.7",
+		"sharp": "^0.33.5",
+		"zod": "^3.24.2"
+	}
+}
