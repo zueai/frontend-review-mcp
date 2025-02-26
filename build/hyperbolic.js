@@ -7,29 +7,34 @@ const models_fallback_order = [
 ];
 export async function vlm({ beforeImage, afterImage, systemPrompt, editRequest, apiKey, model, mimeType = "image/png" }) {
     let retry_attempt = 0;
-    const maxRetries = 3;
-    // If a specific model is provided, use it directly
+    const maxRetries = models_fallback_order.length;
+    // Create a dynamic fallback order that starts with the specified model (if any)
+    // and then includes the default fallback models (without duplicating the specified model)
+    const dynamicFallbackOrder = [];
     if (model) {
-        try {
-            return await callModel(model, beforeImage, afterImage, systemPrompt, editRequest, apiKey, mimeType);
-        }
-        catch (error) {
-            console.error(`Error with specified model ${model}:`, error);
-            // Fall back to using the fallback order if the specified model fails
-            console.log("Falling back to default model fallback order...");
+        // Add the specified model as the first one to try
+        dynamicFallbackOrder.push(model);
+        // Add the rest of the default models, excluding the specified model if it's in the default list
+        for (const defaultModel of models_fallback_order) {
+            if (defaultModel !== model) {
+                dynamicFallbackOrder.push(defaultModel);
+            }
         }
     }
-    // Use fallback order if no model specified or if specified model failed
-    while (retry_attempt <= maxRetries) {
+    else {
+        // If no model specified, just use the default fallback order
+        dynamicFallbackOrder.push(...models_fallback_order);
+    }
+    // Always use the fallback mechanism with our dynamic order
+    while (retry_attempt < dynamicFallbackOrder.length) {
         try {
-            const fallbackModel = models_fallback_order[retry_attempt];
-            return await callModel(fallbackModel, beforeImage, afterImage, systemPrompt, editRequest, apiKey, mimeType);
+            const currentModel = dynamicFallbackOrder[retry_attempt];
+            return await callModel(currentModel, beforeImage, afterImage, systemPrompt, editRequest, apiKey, mimeType);
         }
         catch (error) {
-            if (retry_attempt < maxRetries) {
-                // console.log(
-                // 	`Error with ${models_fallback_order[retry_attempt]} model. Retrying with ${models_fallback_order[retry_attempt + 1]} model...`
-                // )
+            console.error(`Error with model ${dynamicFallbackOrder[retry_attempt]}:`, error);
+            if (retry_attempt < dynamicFallbackOrder.length - 1) {
+                console.log(`Retrying with ${dynamicFallbackOrder[retry_attempt + 1]} model...`);
                 retry_attempt++;
             }
             else {

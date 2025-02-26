@@ -64,12 +64,39 @@ Fallback order:
 3. `meta-llama/Llama-3.2-90B-Vision-Instruct`
 4. `mistralai/Pixtral-12B-2409`
 
-If you want to use a different model, you can add the `MODEL` arg to the command:
+If you want to use a different model as the first model, you can add the `MODEL` arg to the command:
 
 ```bash
 npx frontend-review-mcp HYPERBOLIC_API_KEY=<your-hyperbolic-api-key> MODEL=<your-model>
 ```
 
+It will try the specified model first, and then try the others if it fails.
+
 ## Taking Screenshots
 
 You can use any MCP server to take screenshots. I've been using [https://github.com/AgentDeskAI/browser-tools-mcp](https://github.com/AgentDeskAI/browser-tools-mcp) which has a `takeScreenshot` tool, among other useful tools for frontend development.
+
+## AI Instructions
+
+You can include the following instructions in your AI's prompt to make it take screenshots and review the edit:
+
+```md
+When making frontend edits:
+
+- Before making any changes, call the mcp_takeScreenshot function to save the current state of the page.
+- After making your change, call the mcp_takeScreenshot function again to save the new state of the page.
+- Screenshots will be saved to /screenshots folder.
+- Call the mcp_reviewEdit function to have your changes visually reviewed.
+- Use the following format for the tool call:
+
+
+{
+  "beforeScreenshotPath": string, // Absolute path to the second-most recent screenshot
+  "afterScreenshotPath": string, // Absolute path to the most recent screenshot
+  "editRequest": string // Describe the edit request from the user in a couple of sentences
+}
+
+- You should summarize my edit request into a couple of sentences so that the frontend reviewer understands the changes you made.
+- The tool will either return "yes" if your changes are good, or "no" with a brief explanation if the changes don't satisfy the edit request. Keep editing with the same process until the reviewer returns "yes".
+
+```
