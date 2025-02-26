@@ -62,7 +62,6 @@ export async function vlm({
 	mimeType?: string
 }): Promise<string> {
 	let retry_attempt = 0
-	const maxRetries = models_fallback_order.length
 
 	// Create a dynamic fallback order that starts with the specified model (if any)
 	// and then includes the default fallback models (without duplicating the specified model)
@@ -192,8 +191,7 @@ async function callModel(
 				],
 				model,
 				max_tokens: 4096,
-				temperature: 0.1,
-				top_p: 0.01,
+				temperature: 0.5,
 				stream: false
 			})
 		}

@@ -1,6 +1,6 @@
 {
 	"name": "frontend-review-mcp",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"description": "An MCP server that performs a visual review of UI edit requests",
 	"module": "index.ts",
 	"bin": {
@@ -14,7 +14,8 @@
 		"check": "bunx biome check --write .",
 		"start": "node build/index.js",
 		"bump": "npm version patch --no-git-tag-version",
-		"prepublishOnly": "bun check && npm run build && npm run bump"
+		"prepublishOnly": "bun check && npm run build && npm run bump",
+		"push": "npm run build && npm publish"
 	},
 	"type": "module",
 	"devDependencies": {
