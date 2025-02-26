@@ -1,9 +1,4 @@
-import dotenv from "dotenv";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.join(__dirname, "..", ".env") });
+// import dotenv from "dotenv"
 const models_fallback_order = [
     "Qwen/Qwen2-VL-72B-Instruct",
     "Qwen/Qwen2-VL-7B-Instruct",
