@@ -49,12 +49,14 @@ export async function vlm({
 	afterImage,
 	systemPrompt,
 	editRequest,
+	apiKey,
 	mimeType = "image/png"
 }: {
 	beforeImage: string //base64 encoded image
 	afterImage: string //base64 encoded image
 	systemPrompt?: string
 	editRequest?: string
+	apiKey: string
 	mimeType?: string
 }): Promise<string> {
 	let retry_attempt = 0
@@ -71,7 +73,7 @@ export async function vlm({
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: `Bearer ${process.env.HYPERBOLIC_API_KEY}`
+						Authorization: `Bearer ${apiKey}`
 					},
 					body: JSON.stringify({
 						messages: [

@@ -13,10 +13,8 @@ An MCP server that performs a visual review of a UI edit request. Ask your agent
 	"mcpServers": {
 		"frontend-review": {
 			"command": "npx",
-			"args": ["frontend-review-mcp"],
-			"env": {
-				"HYPERBOLIC_API_KEY": ""
-			}
+			"args": ["frontend-review-mcp HYPERBOLIC_API_KEY=<YOUR_API_KEY>"],
+
 		}
 	}
 }
@@ -37,10 +35,7 @@ HYPERBOLIC_API_KEY=<your-hyperbolic-api-key> npx frontend-review-mcp
 	"mcpServers": {
 		"frontend-review": {
 			"command": "npx",
-			"args": ["frontend-review-mcp"],
-			"env": {
-				"HYPERBOLIC_API_KEY": ""
-			}
+			"args": ["frontend-review-mcp HYPERBOLIC_API_KEY=<YOUR_API_KEY>"]
 		}
 	}
 }

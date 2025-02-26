@@ -5,7 +5,7 @@ const models_fallback_order = [
     "meta-llama/Llama-3.2-90B-Vision-Instruct",
     "mistralai/Pixtral-12B-2409"
 ];
-export async function vlm({ beforeImage, afterImage, systemPrompt, editRequest, mimeType = "image/png" }) {
+export async function vlm({ beforeImage, afterImage, systemPrompt, editRequest, apiKey, mimeType = "image/png" }) {
     let retry_attempt = 0;
     const maxRetries = 3;
     while (retry_attempt <= maxRetries) {
@@ -17,7 +17,7 @@ export async function vlm({ beforeImage, afterImage, systemPrompt, editRequest, 
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${process.env.HYPERBOLIC_API_KEY}`
+                    Authorization: `Bearer ${apiKey}`
                 },
                 body: JSON.stringify({
                     messages: [

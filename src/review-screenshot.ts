@@ -16,13 +16,15 @@ const defaultSystemPrompt = `You are an experienced frontend developer who is re
 export async function reviewScreenshots(
 	beforeScreenshot: string,
 	afterScreenshot: string,
-	editRequest: string
+	editRequest: string,
+	apiKey: string
 ) {
 	const response = await vlm({
 		beforeImage: beforeScreenshot,
 		afterImage: afterScreenshot,
 		systemPrompt: defaultSystemPrompt,
-		editRequest
+		editRequest,
+		apiKey
 	})
 
 	return response

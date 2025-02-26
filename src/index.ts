@@ -6,6 +6,25 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod"
 import { reviewScreenshots } from "./review-screenshot.js"
 
+// Get API key from command line arguments
+let apiKey = ""
+
+// Check if API key is provided in the format HYPERBOLIC_API_KEY=<KEY>
+for (let i = 2; i < process.argv.length; i++) {
+	const arg = process.argv[i]
+	if (arg.startsWith("HYPERBOLIC_API_KEY=")) {
+		apiKey = arg.split("=")[1]
+		break
+	}
+}
+
+// Check if API key was found
+if (!apiKey) {
+	console.error("Error: Missing Hyperbolic API key")
+	console.error("Usage: node script.js HYPERBOLIC_API_KEY=<YOUR_API_KEY>")
+	process.exit(1)
+}
+
 // Create server instance
 const server = new McpServer({
 	name: "review-screenshots",
@@ -39,11 +58,12 @@ server.tool(
 				encoding: "base64"
 			})
 
-			// Call the review function
+			// Call the review function with API key
 			const reviewResult = await reviewScreenshots(
 				beforeScreenshot,
 				afterScreenshot,
-				editRequest
+				editRequest,
+				apiKey
 			)
 
 			return {
