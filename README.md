@@ -104,3 +104,7 @@ find screenshots -type f -name "*.png" -exec stat -f "%m %N" {} \; | sort -nr | 
 - The tool will either return "yes" if your changes are good, or "no" with a brief explanation if the changes don't satisfy the edit request. Keep editing with the same process until the reviewer returns "yes".
 
 ```
+
+## Tips
+
+Make sure YOLO mode is on and MCP tools protection is off in your Cursor settings for the best experience.
