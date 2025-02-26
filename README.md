@@ -55,7 +55,20 @@ The tool will return a response with either a `yes` or `no` response, indicating
 
 ## Review Model
 
-Currently, the review model is Qwen/Qwen2-VL-72B-Instruct from Hyperbolic. You can change this in `src/hyperbolic.ts`.
+Currently, the review model is `Qwen/Qwen2-VL-72B-Instruct` from Hyperbolic. It will automatically retry the request with these models if it fails:
+
+Fallback order:
+
+1. `Qwen/Qwen2-VL-72B-Instruct`
+2. `Qwen/Qwen2-VL-7B-Instruct`
+3. `meta-llama/Llama-3.2-90B-Vision-Instruct`
+4. `mistralai/Pixtral-12B-2409`
+
+If you want to use a different model, you can add the `MODEL` arg to the command:
+
+```bash
+npx frontend-review-mcp HYPERBOLIC_API_KEY=<your-hyperbolic-api-key> MODEL=<your-model>
+```
 
 ## Taking Screenshots
 

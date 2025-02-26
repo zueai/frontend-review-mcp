@@ -17,14 +17,16 @@ export async function reviewScreenshots(
 	beforeScreenshot: string,
 	afterScreenshot: string,
 	editRequest: string,
-	apiKey: string
+	apiKey: string,
+	model?: string
 ) {
 	const response = await vlm({
 		beforeImage: beforeScreenshot,
 		afterImage: afterScreenshot,
 		systemPrompt: defaultSystemPrompt,
 		editRequest,
-		apiKey
+		apiKey,
+		model
 	})
 
 	return response
