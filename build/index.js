@@ -55,7 +55,6 @@ server.tool("reviewEdit", "Review screenshot changes for a UI edit request", {
 async function main() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    console.error("Screenshot Review MCP Server running on stdio");
 }
 main().catch((error) => {
     console.error("Fatal error in main():", error);

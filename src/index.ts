@@ -69,7 +69,6 @@ server.tool(
 async function main() {
 	const transport = new StdioServerTransport()
 	await server.connect(transport)
-	console.error("Screenshot Review MCP Server running on stdio")
 }
 
 main().catch((error) => {

@@ -57,8 +57,8 @@ export async function vlm({
 	while (retry_attempt <= maxRetries) {
 		try {
 			const model = models_fallback_order[retry_attempt]
-			console.log(`Using ${model} model`)
-			await new Promise((resolve) => setTimeout(resolve, 1000))
+			// console.log(`Using ${model} model`)
+			// await new Promise((resolve) => setTimeout(resolve, 1000))
 			const response = await fetch(
 				"https://api.hyperbolic.xyz/v1/chat/completions",
 				{
@@ -132,10 +132,10 @@ export async function vlm({
 			)
 
 			if (!response.ok) {
-				const errorData = (await response.json()) as ErrorResponse
-				console.log(JSON.stringify(errorData, null, 2))
+				const errorData = await response.json()
+				// console.log(JSON.stringify(errorData, null, 2))
 				throw new Error(
-					`Hyperbolic API error: ${errorData.error.message}`
+					`Hyperbolic API error: ${JSON.stringify(errorData)}`
 				)
 			}
 
@@ -148,16 +148,16 @@ export async function vlm({
 					: 0.4
 			const totalCost =
 				(data.usage.total_tokens / 1_000_000) * costPerMillionTokens
-			console.log(
-				`total tokens: ${data.usage.total_tokens}. total cost = $${totalCost}`
-			)
+			// console.log(
+			// 	`total tokens: ${data.usage.total_tokens}. total cost = $${totalCost}`
+			// )
 
 			return data.choices[0].message.content
 		} catch (error) {
 			if (retry_attempt < maxRetries) {
-				console.log(
-					`Error with ${models_fallback_order[retry_attempt]} model. Retrying with ${models_fallback_order[retry_attempt + 1]} model...`
-				)
+				// console.log(
+				// 	`Error with ${models_fallback_order[retry_attempt]} model. Retrying with ${models_fallback_order[retry_attempt + 1]} model...`
+				// )
 				retry_attempt++
 			} else {
 				throw error

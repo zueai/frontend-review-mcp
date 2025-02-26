@@ -12,8 +12,8 @@ export async function vlm({ beforeImage, afterImage, systemPrompt, editRequest, 
     while (retry_attempt <= maxRetries) {
         try {
             const model = models_fallback_order[retry_attempt];
-            console.log(`Using ${model} model`);
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            // console.log(`Using ${model} model`)
+            // await new Promise((resolve) => setTimeout(resolve, 1000))
             const response = await fetch("https://api.hyperbolic.xyz/v1/chat/completions", {
                 method: "POST",
                 headers: {
@@ -82,9 +82,9 @@ export async function vlm({ beforeImage, afterImage, systemPrompt, editRequest, 
                 })
             });
             if (!response.ok) {
-                const errorData = (await response.json());
-                console.log(JSON.stringify(errorData, null, 2));
-                throw new Error(`Hyperbolic API error: ${errorData.error.message}`);
+                const errorData = await response.json();
+                // console.log(JSON.stringify(errorData, null, 2))
+                throw new Error(`Hyperbolic API error: ${JSON.stringify(errorData)}`);
             }
             const data = (await response.json());
             const costPerMillionTokens = model === "mistralai/Pixtral-12B-2409" ||
@@ -92,12 +92,16 @@ export async function vlm({ beforeImage, afterImage, systemPrompt, editRequest, 
                 ? 0.1
                 : 0.4;
             const totalCost = (data.usage.total_tokens / 1_000_000) * costPerMillionTokens;
-            console.log(`total tokens: ${data.usage.total_tokens}. total cost = $${totalCost}`);
+            // console.log(
+            // 	`total tokens: ${data.usage.total_tokens}. total cost = $${totalCost}`
+            // )
             return data.choices[0].message.content;
         }
         catch (error) {
             if (retry_attempt < maxRetries) {
-                console.log(`Error with ${models_fallback_order[retry_attempt]} model. Retrying with ${models_fallback_order[retry_attempt + 1]} model...`);
+                // console.log(
+                // 	`Error with ${models_fallback_order[retry_attempt]} model. Retrying with ${models_fallback_order[retry_attempt + 1]} model...`
+                // )
                 retry_attempt++;
             }
             else {
