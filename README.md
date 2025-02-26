@@ -86,9 +86,15 @@ When making frontend edits:
 - Before making any changes, call the mcp_takeScreenshot function to save the current state of the page.
 - After making your change, call the mcp_takeScreenshot function again to save the new state of the page.
 - Screenshots will be saved to /screenshots folder.
+- Run this command to get the absolute paths of the 2 most recent screenshots in the /screenshots folder:
+
+
+
+find screenshots -type f -name "*.png" -exec stat -f "%m %N" {} \; | sort -nr | head -n 2 | awk '{print $2}' | xargs realpath | awk 'NR==1 {print "before path: ", $0} NR==2 {print "after path: ", $0}'
+
+
 - Call the mcp_reviewEdit function to have your changes visually reviewed.
 - Use the following format for the tool call:
-
 
 {
   "beforeScreenshotPath": string, // Absolute path to the second-most recent screenshot
@@ -97,9 +103,6 @@ When making frontend edits:
 }
 
 - You should summarize my edit request into a couple of sentences so that the frontend reviewer understands the changes you made.
-- You can run this command to get the absolute paths of the 2 most recent screenshots in the /screenshots folder:
-
-find screenshots -type f -name "*.png" -exec stat -f "%m %N" {} \; | sort -nr | head -n 2 | awk '{print $2}' | xargs realpath | awk 'NR==1 {print "before path: ", $0} NR==2 {print "after path: ", $0}'
 
 - The tool will either return "yes" if your changes are good, or "no" with a brief explanation if the changes don't satisfy the edit request. Keep editing with the same process until the reviewer returns "yes".
 
