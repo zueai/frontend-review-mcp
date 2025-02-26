@@ -23,7 +23,7 @@ An MCP server that performs a visual review of a UI edit request. Ask your agent
 - To install globally, add this command to your Cursor settings:
 
 ```bash
-HYPERBOLIC_API_KEY=<your-hyperbolic-api-key> npx frontend-review-mcp
+npx frontend-review-mcp HYPERBOLIC_API_KEY=<your-hyperbolic-api-key>
 ```
 
 ### Windsurf
