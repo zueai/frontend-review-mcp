@@ -11,13 +11,14 @@ const defaultSystemPrompt = `You are an experienced frontend developer who is re
 
     For example, if the edit request is to "change the color of the button to red", and the after screenshot has a blue button, you should respond with "no" followed by "The button color is blue, it should be red".
     `;
-export async function reviewScreenshots(beforeScreenshot, afterScreenshot, editRequest, apiKey) {
+export async function reviewScreenshots(beforeScreenshot, afterScreenshot, editRequest, apiKey, model) {
     const response = await vlm({
         beforeImage: beforeScreenshot,
         afterImage: afterScreenshot,
         systemPrompt: defaultSystemPrompt,
         editRequest,
-        apiKey
+        apiKey,
+        model
     });
     return response;
 }
