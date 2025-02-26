@@ -1,4 +1,4 @@
-# frontend-reviewer-mcp
+# frontend-review-mcp
 
 An MCP server that performs a visual review of a UI edit request. Ask your agent to screenshot the page before and after the edit, and then call this tool to review the edit.
 
@@ -11,9 +11,9 @@ An MCP server that performs a visual review of a UI edit request. Ask your agent
 ```json
 {
 	"mcpServers": {
-		"frontend-reviewer": {
+		"frontend-review": {
 			"command": "npx",
-			"args": ["frontend-reviewer-mcp"],
+			"args": ["frontend-review-mcp"],
 			"env": {
 				"HYPERBOLIC_API_KEY": ""
 			}
@@ -25,7 +25,7 @@ An MCP server that performs a visual review of a UI edit request. Ask your agent
 - To install globally, add this command to your Cursor settings:
 
 ```bash
-HYPERBOLIC_API_KEY=<your-hyperbolic-api-key> npx frontend-reviewer-mcp
+HYPERBOLIC_API_KEY=<your-hyperbolic-api-key> npx frontend-review-mcp
 ```
 
 ### Windsurf
@@ -35,9 +35,9 @@ HYPERBOLIC_API_KEY=<your-hyperbolic-api-key> npx frontend-reviewer-mcp
 ```json
 {
 	"mcpServers": {
-		"frontend-reviewer": {
+		"frontend-review": {
 			"command": "npx",
-			"args": ["frontend-reviewer-mcp"],
+			"args": ["frontend-review-mcp"],
 			"env": {
 				"HYPERBOLIC_API_KEY": ""
 			}

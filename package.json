@@ -1,14 +1,20 @@
 {
-	"name": "screenshot-reader",
+	"name": "frontend-review-mcp",
+	"version": "0.1.1",
+	"description": "An MCP server that performs a visual review of UI edit requests",
 	"module": "index.ts",
 	"bin": {
-		"screenshot-reader": "./build/index.js"
+		"frontend-review-mcp": "./build/index.js"
 	},
-	"files": ["build"],
+	"files": [
+		"build"
+	],
 	"scripts": {
 		"build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
 		"check": "bunx biome check --write .",
-		"start": "node build/index.js"
+		"start": "node build/index.js",
+		"bump": "npm version patch --no-git-tag-version",
+		"prepublishOnly": "bun check && npm run build && npm run bump"
 	},
 	"type": "module",
 	"devDependencies": {
@@ -24,5 +30,21 @@
 		"dotenv": "^16.4.7",
 		"sharp": "^0.33.5",
 		"zod": "^3.24.2"
+	},
+	"keywords": [
+		"mcp",
+		"frontend",
+		"review",
+		"screenshot",
+		"ui"
+	],
+	"author": "",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/zueai/frontend-review-mcp"
+	},
+	"engines": {
+		"node": ">=18"
 	}
 }
