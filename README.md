@@ -53,6 +53,10 @@ Your Agent will call this tool with the following arguments:
 
 The tool will return a response with either a `yes` or `no` response, indicating whether the edit visually satisfies the edit request. If no, it will provide a detailed explanation of why the edit does not satisfy the request so you can continue to work on it.
 
+## Review Model
+
+Currently, the review model is Qwen/Qwen2-VL-72B-Instruct from Hyperbolic. You can change this in `src/hyperbolic.ts`.
+
 ## Taking Screenshots
 
 You can use any MCP server to take screenshots. I've been using [https://github.com/AgentDeskAI/browser-tools-mcp](https://github.com/AgentDeskAI/browser-tools-mcp) which has a `takeScreenshot` tool, among other useful tools for frontend development.
