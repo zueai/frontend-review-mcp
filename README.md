@@ -1,8 +1,21 @@
 # frontend-review-mcp
 
+[![smithery badge](https://smithery.ai/badge/@zueai/frontend-review-mcp)](https://smithery.ai/server/@zueai/frontend-review-mcp)
+
 An MCP server that performs a visual review of a UI edit request. Ask your agent to screenshot the page before and after the edit, and then call this tool to review the edit.
 
 ## Usage
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+### Installing via Smithery
+
+To install this protocol for Output Partner automatically via [Smithery](https://smithery.ai/server/@zueai/frontend-review-mcp):
+
+```bash
+npx -y @smithery/cli install @zueai/frontend-review-mcp --client cursor
+```
+
+npx @smithery/cli install @zueai/windsurf-mcp --client windsurf
+```
 
 ### Cursor
 
