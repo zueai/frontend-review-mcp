@@ -1,0 +1,33 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - hyperbolicApiKey
+    properties:
+      hyperbolicApiKey:
+        type: string
+        description: Hyperbolic API key for accessing the review model
+      model:
+        type: string
+        description: "Optional: Model name to prioritize for review requests. If not
+          provided, defaults will be used."
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => { 
+      const args = [];
+      // Assemble the startup command using the provided API key and optional model
+      let baseCommand = `frontend-review-mcp HYPERBOLIC_API_KEY=${config.hyperbolicApiKey}`;
+      if(config.model && config.model.trim() !== ""){
+          baseCommand += ` MODEL=${config.model}`;
+      }
+      // Use npx to run the command
+      return { command: 'npx', args: [baseCommand] };
+    }
+  exampleConfig:
+    hyperbolicApiKey: dummy-api-key
+    model: Qwen/Qwen2-VL-72B-Instruct
